@@ -20,6 +20,8 @@ public abstract class SOAPDeserializable {
             if (f.isAnnotationPresent(JSoapResField.class)) {
                 f.setAccessible(true);
                 String name = f.getAnnotation(JSoapResField.class).name();
+                if (name.equals("JSOAP_DEFAULT_FIELD_NAME"))
+                    name = f.getName();
                 setObjectValue(f, object, name, false);
             }
             else if (f.isAnnotationPresent(JSoapAttribute.class)){

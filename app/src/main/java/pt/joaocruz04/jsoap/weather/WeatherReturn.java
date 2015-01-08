@@ -14,8 +14,8 @@ public class WeatherReturn extends SOAPDeserializable {
     @JSoapResField(name = "Success")
     private boolean success;
 
-    @JSoapResField(name = "ResponseText")
-    private String responseText;
+    @JSoapResField
+    private String ResponseText;
 
     @JSoapResField(name = "City")
     private String city;
