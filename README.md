@@ -129,8 +129,19 @@ private void getWS() {
 ## Add JSoap to your project
 Since JSoap is on Maven Central, adding it to your project is as simple as adding one of the following snippets for Maven or Gradle projects.
 
+### Gradle
 ```
-Soon to be released!
+compile 'com.github.joaocruz04:jsoap:1.0.0'
+```
+
+### Maven
+```
+<dependency>
+  <groupId>com.github.joaocruz04</groupId>
+  <artifactId>jsoap</artifactId>
+  <version>1.0.0</version>
+  <type>aar</type>
+</dependency>
 ```
 
 ## License

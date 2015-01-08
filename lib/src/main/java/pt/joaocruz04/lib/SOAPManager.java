@@ -223,7 +223,7 @@ public class SOAPManager {
     }
 
     private static ArrayList<ComparableProperty> extractProperties(Object obj) {
-        ArrayList<ComparableProperty> parameters = new ArrayList<>();
+        ArrayList<ComparableProperty> parameters = new ArrayList<ComparableProperty>();
 
         Field[] fields = obj.getClass().getDeclaredFields();
         for (Field f : fields) {

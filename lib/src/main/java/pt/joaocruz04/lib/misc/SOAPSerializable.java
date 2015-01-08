@@ -18,12 +18,12 @@ import java.util.Hashtable;
  */
 public abstract class SOAPSerializable extends SoapObject {
 
-    private HashMap<Integer, Field> fields_map = new HashMap<>();
-    private ArrayList<Field> attributes_map = new ArrayList<>();
+    private HashMap<Integer, Field> fields_map = new HashMap<Integer, Field>();
+    private ArrayList<Field> attributes_map = new ArrayList<Field>();
 
 
     protected SOAPSerializable() {
-        fields_map = new HashMap<>();
+        fields_map = new HashMap<Integer, Field>();
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field f : fields) {
             f.setAccessible(true);
