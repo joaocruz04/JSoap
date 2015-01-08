@@ -1,19 +1,19 @@
 package pt.joaocruz04.jsoap.weather;
 
-import pt.joaocruz04.lib.annotations.SoapResponseElement;
+import pt.joaocruz04.lib.annotations.JSoapResField;
 import pt.joaocruz04.lib.misc.SOAPDeserializable;
 
 /**
- * Created by BEWARE S.A. on 07/01/15.
+ * Created by Joao Cruz on 07/01/15.
  */
 
 public class WeatherDescription extends SOAPDeserializable {
 
-    @SoapResponseElement(name = "WeatherID")
+    @JSoapResField(name = "WeatherID")
     private int weatherID;
-    @SoapResponseElement(name = "Description")
+    @JSoapResField(name = "Description")
     private String description;
-    @SoapResponseElement(name = "PictureURL")
+    @JSoapResField(name = "PictureURL")
     private String pictureURL;
 
 

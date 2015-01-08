@@ -11,8 +11,6 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface JSoapField {
-    String fieldName() default "JSOAP_DEFAULT_FIELDNAME";
-    String namespace() default "JSOAP_DEFAULT_NAMESPACE";
-    int order();
+public @interface JSoapResField {
+    String name();
 }

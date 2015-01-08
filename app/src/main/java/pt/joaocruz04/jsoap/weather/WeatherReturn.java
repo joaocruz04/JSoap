@@ -1,53 +1,53 @@
 package pt.joaocruz04.jsoap.weather;
 
 import pt.joaocruz04.lib.annotations.JSoapClass;
-import pt.joaocruz04.lib.annotations.SoapResponseElement;
+import pt.joaocruz04.lib.annotations.JSoapResField;
 import pt.joaocruz04.lib.misc.SOAPDeserializable;
 
 /**
- * Created by BEWARE S.A. on 07/01/15.
+ * Created by Joao Cruz on 07/01/15.
  */
 
 @JSoapClass(namespace = "http://ws.cdyne.com/WeatherWS/")
 public class WeatherReturn extends SOAPDeserializable {
 
-    @SoapResponseElement(name = "Success")
+    @JSoapResField(name = "Success")
     private boolean success;
 
-    @SoapResponseElement(name = "ResponseText")
+    @JSoapResField(name = "ResponseText")
     private String responseText;
 
-    @SoapResponseElement(name = "City")
+    @JSoapResField(name = "City")
     private String city;
 
-    @SoapResponseElement(name = "WeatherStationCity")
+    @JSoapResField(name = "WeatherStationCity")
     private String stationCity;
 
-    @SoapResponseElement(name = "WeatherID")
+    @JSoapResField(name = "WeatherID")
     private String weatherID;
 
-    @SoapResponseElement(name = "Description")
+    @JSoapResField(name = "Description")
     private String description;
 
-    @SoapResponseElement(name = "Temperature")
+    @JSoapResField(name = "Temperature")
     private String temperature;
 
-    @SoapResponseElement(name = "RelativeHumidity")
+    @JSoapResField(name = "RelativeHumidity")
     private String relHumidity;
 
-    @SoapResponseElement(name = "Wind")
+    @JSoapResField(name = "Wind")
     private String wind;
 
-    @SoapResponseElement(name = "Pressure")
+    @JSoapResField(name = "Pressure")
     private String pressure;
 
-    @SoapResponseElement(name = "Visibility")
+    @JSoapResField(name = "Visibility")
     private String visibility;
 
-    @SoapResponseElement(name = "WindChill")
+    @JSoapResField(name = "WindChill")
     private String windChill;
 
-    @SoapResponseElement(name = "Remarks")
+    @JSoapResField(name = "Remarks")
     private String remarks;
 
 

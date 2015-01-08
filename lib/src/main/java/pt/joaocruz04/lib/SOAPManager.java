@@ -11,7 +11,9 @@ import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlPullParserException;
 import pt.joaocruz04.lib.annotations.JSoapAttribute;
 import pt.joaocruz04.lib.annotations.JSoapClass;
-import pt.joaocruz04.lib.annotations.JSoapField;
+import pt.joaocruz04.lib.annotations.JSoapReqField;
+import pt.joaocruz04.lib.misc.JSoapCallback;
+import pt.joaocruz04.lib.misc.JsoapError;
 import pt.joaocruz04.lib.misc.SOAPDeserializable;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -31,15 +33,15 @@ import java.util.Collections;
 import java.util.Comparator;
 
 /**
- * Created by BEWARE S.A. on 16/12/14.
+ * Created by Joao Cruz on 16/12/14.
  */
 public class SOAPManager {
 
     private static final String TAG = "SOAPManager";
-    public enum WSError {NETWORK_ERROR, PARSE_ERROR, OTHER_ERROR};
 
 
-    public static void get(final String namespace, final String url, final String methodName, final String soap_action, final Object obj, final Class outputClass, final WSCallback callback) {
+
+    public static void get(final String namespace, final String url, final String methodName, final String soap_action, final Object obj, final Class outputClass, final JSoapCallback callback) {
 
         final ArrayList<ComparableProperty> parameters = extractProperties(obj);
         Collections.sort(parameters, new ComparablePropertyComparator());
@@ -78,7 +80,7 @@ public class SOAPManager {
                     } else {
                         if (reslt.toString().equals("")) {
                             Log.e(TAG, "The " + methodName + " webservice returned empty");
-                            callback.onError(WSError.OTHER_ERROR);
+                            callback.onError(JsoapError.OTHER_ERROR);
                             return null;
                         } else if (reslt instanceof SoapObject) {
                             //callback.onSuccess((SoapObject) reslt);
@@ -113,23 +115,23 @@ public class SOAPManager {
                             }
                             else {
                                 Log.e(TAG, "The " + methodName + " webservice returns a primitive object, but you didn't specify a valid primitive output class.");
-                                callback.onError(WSError.OTHER_ERROR);
+                                callback.onError(JsoapError.OTHER_ERROR);
                             }
                         } else {
-                            callback.onError(WSError.OTHER_ERROR);
+                            callback.onError(JsoapError.OTHER_ERROR);
                             return null;
                         }
                     }
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    callback.onError(WSError.NETWORK_ERROR);
+                    callback.onError(JsoapError.NETWORK_ERROR);
                 } catch (XmlPullParserException e) {
                     e.printStackTrace();
-                    callback.onError(WSError.PARSE_ERROR);
+                    callback.onError(JsoapError.PARSE_ERROR);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    callback.onError(WSError.OTHER_ERROR);
+                    callback.onError(JsoapError.OTHER_ERROR);
                 }
 
                 return null;
@@ -225,19 +227,19 @@ public class SOAPManager {
 
         Field[] fields = obj.getClass().getDeclaredFields();
         for (Field f : fields) {
-            if (f.isAnnotationPresent(JSoapField.class)) {
+            if (f.isAnnotationPresent(JSoapReqField.class)) {
                 f.setAccessible(true);
                 String name=null, ns=null;
 
 
-                String prpname = f.getAnnotation(JSoapField.class).fieldName();
+                String prpname = f.getAnnotation(JSoapReqField.class).fieldName();
                 if (prpname.equals("JSOAP_DEFAULT_FIELDNAME"))
                     name = f.getName();
                 else
-                    name = f.getAnnotation(JSoapField.class).fieldName();
+                    name = f.getAnnotation(JSoapReqField.class).fieldName();
 
 
-                String prpns = f.getAnnotation(JSoapField.class).namespace();
+                String prpns = f.getAnnotation(JSoapReqField.class).namespace();
                 if (prpns.equals("JSOAP_DEFAULT_NAMESPACE")) {
                     if (obj.getClass().getAnnotation(JSoapClass.class) != null) {
                         ns = obj.getClass().getAnnotation(JSoapClass.class).namespace();
@@ -250,7 +252,7 @@ public class SOAPManager {
                 }
 
 
-                int order = f.getAnnotation(JSoapField.class).order();
+                int order = f.getAnnotation(JSoapReqField.class).order();
                 try {
                     PropertyInfo info = createPropertyInfo(f.get(obj), ns, name, f.getType());
                     parameters.add(new ComparableProperty(info, order));
@@ -277,11 +279,7 @@ public class SOAPManager {
 
 
 
-    public static abstract class WSCallback {
-        public abstract void onSuccess(Object result);
-        public abstract void onError(WSError error);
-        public void onDebugMessage(String title, String message) {}
-    }
+
 
     private static class ComparableProperty {
         public PropertyInfo property;

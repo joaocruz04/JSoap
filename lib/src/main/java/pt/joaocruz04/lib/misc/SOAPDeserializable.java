@@ -3,13 +3,13 @@ package pt.joaocruz04.lib.misc;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import pt.joaocruz04.lib.annotations.JSoapAttribute;
-import pt.joaocruz04.lib.annotations.SoapResponseElement;
+import pt.joaocruz04.lib.annotations.JSoapResField;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 
 /**
- * Created by BEWARE S.A. on 16/12/14.
+ * Created by Joao Cruz on 16/12/14.
  */
 public abstract class SOAPDeserializable {
 
@@ -17,9 +17,9 @@ public abstract class SOAPDeserializable {
     public void fromSOAPObject(SoapObject object) {
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field f : fields) {
-            if (f.isAnnotationPresent(SoapResponseElement.class)) {
+            if (f.isAnnotationPresent(JSoapResField.class)) {
                 f.setAccessible(true);
-                String name = f.getAnnotation(SoapResponseElement.class).name();
+                String name = f.getAnnotation(JSoapResField.class).name();
                 setObjectValue(f, object, name, false);
             }
             else if (f.isAnnotationPresent(JSoapAttribute.class)){

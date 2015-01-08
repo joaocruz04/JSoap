@@ -6,7 +6,7 @@ import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
 import pt.joaocruz04.lib.annotations.JSoapAttribute;
 import pt.joaocruz04.lib.annotations.JSoapClass;
-import pt.joaocruz04.lib.annotations.JSoapField;
+import pt.joaocruz04.lib.annotations.JSoapReqField;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Hashtable;
 
 /**
- * Created by BEWARE S.A. on 16/12/14.
+ * Created by Joao Cruz on 16/12/14.
  */
 public abstract class SOAPSerializable extends SoapObject {
 
@@ -27,8 +27,8 @@ public abstract class SOAPSerializable extends SoapObject {
         Field[] fields = this.getClass().getDeclaredFields();
         for (Field f : fields) {
             f.setAccessible(true);
-            if (f.isAnnotationPresent(JSoapField.class)) {
-                int order = f.getAnnotation(JSoapField.class).order();
+            if (f.isAnnotationPresent(JSoapReqField.class)) {
+                int order = f.getAnnotation(JSoapReqField.class).order();
                 fields_map.put(order, f);
             }
             else {
@@ -125,14 +125,14 @@ public abstract class SOAPSerializable extends SoapObject {
             else
                 propertyInfo.type = f.getClass();
 
-            String prpname = f.getAnnotation(JSoapField.class).fieldName();
+            String prpname = f.getAnnotation(JSoapReqField.class).fieldName();
             if (prpname.equals("JSOAP_DEFAULT_FIELDNAME"))
                 propertyInfo.name = f.getName();
             else
-                propertyInfo.name = f.getAnnotation(JSoapField.class).fieldName();
+                propertyInfo.name = f.getAnnotation(JSoapReqField.class).fieldName();
 
 
-            String prpns = f.getAnnotation(JSoapField.class).namespace();
+            String prpns = f.getAnnotation(JSoapReqField.class).namespace();
             if (prpns.equals("JSOAP_DEFAULT_NAMESPACE")) {
                 if (this.getClass().getAnnotation(JSoapClass.class) != null) {
                     String ns = this.getClass().getAnnotation(JSoapClass.class).namespace();
