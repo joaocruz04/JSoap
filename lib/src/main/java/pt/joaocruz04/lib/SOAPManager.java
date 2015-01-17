@@ -72,6 +72,11 @@ public class SOAPManager {
                     callback.onDebugMessage("REQUEST " + methodName + ":", reqDump);
                     callback.onDebugMessage("RESPONSE " + methodName + ":", resDump);
 
+                    if (outputClass == null) {
+                        callback.onSuccess(resDump);
+                        return null;
+                    }
+
                     Object reslt = envelope.getResponse();
 
                     if (reslt == null) {
