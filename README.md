@@ -144,6 +144,12 @@ compile 'com.github.joaocruz04:jsoap:1.0.0'
 </dependency>
 ```
 
+## Changelog
+
+### 1.0.1 (17 Jan 2015)
+- As requested, now you can get the raw (String) result from a request by passing **null** as the output class in the SOAPManager.get method.
+
+
 ## License
 
 ```
