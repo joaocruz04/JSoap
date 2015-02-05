@@ -1,43 +1,30 @@
 package pt.joaocruz04.lib.misc;
 
 import android.util.Log;
+
 import org.ksoap2.serialization.AttributeInfo;
 import org.ksoap2.serialization.PropertyInfo;
 import org.ksoap2.serialization.SoapObject;
-import pt.joaocruz04.lib.annotations.JSoapAttribute;
-import pt.joaocruz04.lib.annotations.JSoapClass;
-import pt.joaocruz04.lib.annotations.JSoapReqField;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 
+import pt.joaocruz04.lib.annotations.JSoapAttribute;
+import pt.joaocruz04.lib.annotations.JSoapClass;
+import pt.joaocruz04.lib.annotations.JSoapReqField;
+
 /**
- * Created by Joao Cruz on 16/12/14.
+ * Created by joaocruz04 on 04/02/15.
  */
-public abstract class SOAPSerializable extends SoapObject {
+public class TheSoapClass extends SoapObject{
+    public HashMap<Integer, Field> fields_map;;
+    public ArrayList<Field> attributes_map;
 
-    private HashMap<Integer, Field> fields_map = new HashMap<Integer, Field>();
-    private ArrayList<Field> attributes_map = new ArrayList<Field>();
-
-
-    protected SOAPSerializable() {
+    public TheSoapClass() {
         fields_map = new HashMap<Integer, Field>();
-        Field[] fields = this.getClass().getDeclaredFields();
-        for (Field f : fields) {
-            f.setAccessible(true);
-            if (f.isAnnotationPresent(JSoapReqField.class)) {
-                int order = f.getAnnotation(JSoapReqField.class).order();
-                fields_map.put(order, f);
-            }
-            else {
-                if (f.isAnnotationPresent(JSoapAttribute.class)) {
-                    attributes_map.add(f);
-                }
-            }
-        }
-        System.out.println("there.");
+        attributes_map = new ArrayList<Field>();
     }
 
     @Override
@@ -150,6 +137,4 @@ public abstract class SOAPSerializable extends SoapObject {
             }
         }
     }
-
-
 }

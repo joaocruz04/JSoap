@@ -10,7 +10,7 @@ import pt.joaocruz04.lib.misc.SOAPDeserializable;
 
 
 @JSoapClass(namespace = "http://ws.cdyne.com/WeatherWS/")
-public class GetWeatherInformationResponse extends SOAPDeserializable {
+public class GetWeatherInformationResponse {
 
     @JSoapResField(name = "GetWeatherInformationResult")
     public WeatherDescription[] result;

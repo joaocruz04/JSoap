@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
         });
     }
 
-    private void getWeatherByZip() {
+    private static void getWeatherByZip() {
         String url="http://wsf.cdyne.com/WeatherWS/Weather.asmx";
         String namespace="http://ws.cdyne.com/WeatherWS/";
         String method = "GetCityWeatherByZIP";
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 
 
 
-    private void getWeatherInfo() {
+    private static void getWeatherInfo() {
         String url="http://wsf.cdyne.com/WeatherWS/Weather.asmx";
         String namespace="http://ws.cdyne.com/WeatherWS";
         String method = "GetWeatherInformation";

@@ -97,7 +97,7 @@ Note again if you ommit the name property of the JSoapResField, the field name w
 The request is very simple to make. Just call the **get** method from the **SOAPManager** class with the necessary information. Like this:
 
 ```java
-private void getWS() {
+private static void getWS() {
         String url="your-url/your-service.asmx or .svc";
         String namespace="yournamespace";
         String method = "webservice_method_name";

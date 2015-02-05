@@ -14,7 +14,7 @@ import pt.joaocruz04.lib.annotations.JSoapClass;
 import pt.joaocruz04.lib.annotations.JSoapReqField;
 import pt.joaocruz04.lib.misc.JSoapCallback;
 import pt.joaocruz04.lib.misc.JsoapError;
-import pt.joaocruz04.lib.misc.SOAPDeserializable;
+import pt.joaocruz04.lib.misc.SoapDeserializer;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -55,7 +55,7 @@ public class SOAPManager {
 
                     if (parameters != null) for (ComparableProperty propertyInfo : parameters)
                         request.addProperty(propertyInfo.property);
-
+                    //SoapObject reqO = SOAPSerializer.createSoapObject(obj);
                     addAttributes(request, obj);
 
                     SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -88,10 +88,9 @@ public class SOAPManager {
                             callback.onError(JsoapError.OTHER_ERROR);
                             return null;
                         } else if (reslt instanceof SoapObject) {
-                            //callback.onSuccess((SoapObject) reslt);
                             if (outputClass != null) {
-                                SOAPDeserializable o = (SOAPDeserializable)outputClass.newInstance();
-                                o.fromSOAPObject((SoapObject)reslt);
+                                Object obj = outputClass.newInstance();
+                                Object o = SoapDeserializer.fromSoapObject(obj, outputClass, (SoapObject) reslt);
                                 callback.onSuccess(o);
                             }
                         } else if (reslt instanceof SoapPrimitive) {

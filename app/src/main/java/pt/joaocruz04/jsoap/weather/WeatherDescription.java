@@ -7,7 +7,7 @@ import pt.joaocruz04.lib.misc.SOAPDeserializable;
  * Created by Joao Cruz on 07/01/15.
  */
 
-public class WeatherDescription extends SOAPDeserializable {
+public class WeatherDescription {
 
     @JSoapResField(name = "WeatherID")
     private int weatherID;
@@ -15,6 +15,5 @@ public class WeatherDescription extends SOAPDeserializable {
     private String description;
     @JSoapResField(name = "PictureURL")
     private String pictureURL;
-
 
 }
